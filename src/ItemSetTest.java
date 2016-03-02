@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
-public class ItemSetSupportLineTest {
+public class ItemSetTest {
 
     @Test
     public void testGenerateItemSetKey() throws Exception {
@@ -13,7 +13,7 @@ public class ItemSetSupportLineTest {
         itemSet.add("milk");
         itemSet.add("eggs");
 
-        ItemSetSupportLine itemSetSupportLine = new ItemSetSupportLine(itemSet, 5);
+        ItemSet itemSetSupportLine = new ItemSet(itemSet, 5);
         String actualKey = itemSetSupportLine.generateItemSetKey();
 
         assertEquals("Should generate key", actualKey, "[beer, eggs, milk]");
@@ -31,8 +31,8 @@ public class ItemSetSupportLineTest {
         itemSet2.add("milk");
         itemSet2.add("beer");
 
-        ItemSetSupportLine itemSetSupportLine1 = new ItemSetSupportLine(itemSet1, 5);
-        ItemSetSupportLine itemSetSupportLine2 = new ItemSetSupportLine(itemSet2, 5);
+        ItemSet itemSetSupportLine1 = new ItemSet(itemSet1, 5);
+        ItemSet itemSetSupportLine2 = new ItemSet(itemSet2, 5);
 
         assertEquals("Should return true", itemSetSupportLine1.equals(itemSetSupportLine2), true);
     }

@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class AprioriHelper {
     Double supportThreshold;
@@ -13,40 +12,40 @@ public class AprioriHelper {
         this.distinctItems = DataSetManager.getDistinctItemsFromTransactionList(this.transactionList);
     }
 
-    public ItemSetSupportList getInitialCandidateList(){
-        ItemSetSupportList candidateList = new ItemSetSupportList();
+    public ItemSetList getInitialCandidateList(){
+        ItemSetList candidateList = new ItemSetList();
 
         for(String distinctItem: this.distinctItems){
             ArrayList<String> itemSet = new ArrayList<>();
             itemSet.add(distinctItem);
             Integer supportCount = DataSetManager.getItemCountInTransactionList(this.transactionList, distinctItem);
-            ItemSetSupportLine item = new ItemSetSupportLine(itemSet, supportCount);
+            ItemSet item = new ItemSet(itemSet, supportCount);
             candidateList.addItemSetSupportLine(item);
         }
         return candidateList;
     }
 
-    public ItemSetSupportList generateFrequentListFromCandidateList(ItemSetSupportList candidateList){
-        ArrayList<ItemSetSupportLine> itemLineList = candidateList.getItemSetSupportList();
-        ItemSetSupportList frequentList = new ItemSetSupportList();
+    public ItemSetList generateFrequentListFromCandidateList(ItemSetList candidateList){
+        ArrayList<ItemSet> itemLineList = candidateList.getItemSetSupportList();
+        ItemSetList frequentList = new ItemSetList();
 
-        for(ItemSetSupportLine item : itemLineList){
-            if(item.getSupportCount() >= this.supportThreshold){
+        for(ItemSet item : itemLineList){
+            if((double) (item.getFrequency())/(double) (this.transactionList.size()) >= this.supportThreshold){
                 frequentList.addItemSetSupportLine(item);
             }
         }
         return frequentList;
     }
 
-    public ItemSetSupportList generateNextCandidateList(ItemSetSupportList currentCandidateList){
+    public ItemSetList generateNextCandidateList(ItemSetList currentCandidateList){
 
-        ItemSetSupportList nextCandidateList = new ItemSetSupportList();
+        ItemSetList nextCandidateList = new ItemSetList();
 
-        ArrayList<ItemSetSupportLine> currentItemSetList = currentCandidateList.getItemSetSupportList();
+        ArrayList<ItemSet> currentItemSetList = currentCandidateList.getItemSetSupportList();
         Integer setSize = currentItemSetList.get(0).getItemSet().size();
 
-        for(ItemSetSupportLine itemSetSupportLine : currentItemSetList){
-            ArrayList<String> itemSetArray = itemSetSupportLine.getItemSet();
+        for(ItemSet itemSet : currentItemSetList){
+            ArrayList<String> itemSetArray = itemSet.getItemSet();
 
             for(String distinctItem : this.distinctItems){
 
@@ -65,7 +64,7 @@ public class AprioriHelper {
                         }
                     }
 
-                    ItemSetSupportLine newItemSet = new ItemSetSupportLine(newItemSetArray, supportCount);
+                    ItemSet newItemSet = new ItemSet(newItemSetArray, supportCount);
 
                     if(!nextCandidateList.containsItemSetSupportLine(newItemSet)){
                         nextCandidateList.addItemSetSupportLine(newItemSet);
