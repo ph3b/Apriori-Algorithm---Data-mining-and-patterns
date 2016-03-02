@@ -12,16 +12,15 @@ public class FrequentItemSets {
 
         System.out.print("size;items \n");
         for(ItemSet itemSet : frequentList.getItemSetSupportList()){
-            System.out.print(itemSet.getItemSet().size() + ";" + itemSet.toString() + "\n");
+            System.out.print(itemSet.getItemSet().size() + ";" + itemSet + "\n");
         }
 
         while(frequentList.getItemSetSupportList().size() > 0){
             frequentList = apriori.generateFrequentListFromCandidateList(apriori.generateNextCandidateList(frequentList));
 
             for(ItemSet itemSet : frequentList.getItemSetSupportList()){
-                System.out.print(itemSet.getItemSet().size() + ";" + itemSet.toString() + "\n");
+                System.out.print(itemSet.getItemSet().size() + ";" + itemSet + "\n");
             }
         }
-
     }
 }

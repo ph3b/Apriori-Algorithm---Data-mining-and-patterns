@@ -58,7 +58,6 @@ public class AprioriHelperTest {
     @Test
     public void testgenerateNextCandidateList2(){
         ArrayList<ArrayList<String>> transactionList = DataSetManager.convertToTransactionList(DataSetManager.getDataSet());
-
         AprioriHelper aprioriSolver = new AprioriHelper(0.50, transactionList);
 
         // 1. iteration
@@ -76,6 +75,23 @@ public class AprioriHelperTest {
         // 4.Iteration
         ItemSetList fourthCandidateList = aprioriSolver.generateNextCandidateList(thirdFrequentList);
         ItemSetList fourthFrequentList = aprioriSolver.generateFrequentListFromCandidateList(fourthCandidateList);
+
+        System.out.print(frequentList);
+        System.out.print(secondFrequentList);
+        System.out.print(thirdFrequentList);
+        System.out.print(fourthFrequentList);
+
+
+        assertEquals
+                ("========================================\n" +
+                "| Item set                     Support |\n" +
+                "| ==================================== |\n" +
+                "| [bread, milk]                      4 |\n" +
+                "| [bread, diapers]                   4 |\n" +
+                "| [diapers, milk]                    4 |\n" +
+                "| [beer, diapers]                    3 |\n" +
+                "| =====================================|\n\n", secondFrequentList.toString());
+
     }
 
 }

@@ -38,7 +38,6 @@ public class AprioriHelper {
     }
 
     public ItemSetList generateNextCandidateList(ItemSetList currentCandidateList){
-
         ItemSetList nextCandidateList = new ItemSetList();
 
         ArrayList<ItemSet> currentItemSetList = currentCandidateList.getItemSetSupportList();
@@ -58,12 +57,12 @@ public class AprioriHelper {
                     newItemSetArray.add(distinctItem);
 
                     Integer supportCount = 0;
+
                     for(ArrayList<String> transaction : this.transactionList){
                         if(transaction.containsAll(newItemSetArray)){
                             supportCount++;
                         }
                     }
-
                     ItemSet newItemSet = new ItemSet(newItemSetArray, supportCount);
 
                     if(!nextCandidateList.containsItemSetSupportLine(newItemSet)){

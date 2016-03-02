@@ -39,9 +39,7 @@ public class ItemSet {
                 output += item;
             }
             counter++;
-
         }
-
         return output;
     }
 

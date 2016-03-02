@@ -29,7 +29,12 @@ public class ItemSetList {
         output         += "| Item set                     Support |\n";
         output         += "| ==================================== |\n";
         for(ItemSet itemSet : this.itemSetSupportList){
-            output += "| " + itemSet.generateItemSetKey() + "                " + itemSet.getFrequency() + "  |\n";
+            output += "| " + itemSet.generateItemSetKey();
+            Integer length = itemSet.generateItemSetKey().length();
+            for(Integer i = 0; i < 35-length; i++){
+                output += " ";
+            }
+            output += itemSet.getFrequency() + " |\n";
         }
         output += "| =====================================|\n\n";
         return output;
